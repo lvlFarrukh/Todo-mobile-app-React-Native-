@@ -1,5 +1,7 @@
 // import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 import { StyleSheet, Text, View, TextInput, ImageBackground, TouchableOpacity } from 'react-native';
 
 export default function App() {
@@ -14,10 +16,104 @@ export default function App() {
 
         <View style={styles.todos}>
 
+          <View style={styles.todoItem}>
+            <Text style={styles.todoText}>
+              Conqure India
+            </Text>
+
+            <Icon 
+              name="edit"
+              size={25}
+              color={'green'}
+              style={{margin: 5}}
+              onPress={()=>{}}
+            />
+
+            <Icon 
+              name="remove"
+              size={25}
+              color={'red'}
+              style={{margin: 5}}
+
+            />
+            
+          </View>
+
+          <View style={styles.todoItem}>
+            <Text style={styles.todoText}>
+              Conqure India
+            </Text>
+
+            <Icon 
+              name="edit"
+              size={25}
+              color={'green'}
+              style={{margin: 5}}
+              onPress={()=>{}}
+            />
+
+            <Icon 
+              name="remove"
+              size={25}
+              color={'red'}
+              style={{margin: 5}}
+
+            />
+            
+          </View>
+
+          <View style={styles.todoItem}>
+            <Text style={styles.todoText}>
+              Conqure India
+            </Text>
+
+            <Icon 
+              name="edit"
+              size={25}
+              color={'green'}
+              style={{margin: 5}}
+              onPress={()=>{}}
+            />
+
+            <Icon 
+              name="remove"
+              size={25}
+              color={'red'}
+              style={{margin: 5}}
+
+            />
+            
+          </View>
+
+          <View style={styles.todoItem}>
+            <Text style={styles.todoText}>
+              Conqure India
+            </Text>
+
+            <Icon 
+              name="edit"
+              size={25}
+              color={'green'}
+              style={{margin: 5}}
+              onPress={()=>{}}
+            />
+
+            <Icon 
+              name="remove"
+              size={25}
+              color={'red'}
+              style={{margin: 5}}
+
+            />
+            
+          </View>
+
         </View>
+        
 
         <View style={styles.inputTodo}>
           <TextInput 
+            autoCorrect={false}
             placeholder="Enter todo"
             style={styles.inp}
           />
@@ -59,7 +155,7 @@ const styles = StyleSheet.create({
     width: 270,
     fontSize: 20,
     paddingLeft: 5,
-    marginRight: 10
+    marginRight: 10,
   },
   todos: {
     flex: 10,
@@ -81,6 +177,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
     color: "white",
     fontWeight: "bold",
-  }
+  },
+  todoItem: {
+    backgroundColor: "#a39fb6",
+    width: "95%",
+    borderRadius: 6,
+    flexDirection: "row",
+    padding: 5,
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: 5,
+    marginTop: 5,
+    alignItems: "center"
+    // flexWrap: 'wrap'
+  },
+  todoText: {
+    width: "80%", 
+    fontSize: 20, 
+    paddingLeft: 5
+  },
+  
 
 });
