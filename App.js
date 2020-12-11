@@ -10,9 +10,17 @@ export default function App() {
   let [todo, setTodo] = useState([]);
 
   const addTodo = val=> {
-    
-    setTodo([...todo, val])
-    setinpVal("")
+    if(val != ""){
+      setTodo([...todo, {task: val, done: 0}])
+      setinpVal("") 
+    }
+  }
+
+  const remove = ind=> {
+    let todos = todo.filter((v, i)=> {
+      return i != ind 
+    })
+    setTodo(todos)
   }
 
 
@@ -38,23 +46,15 @@ export default function App() {
               return (
                 <View style={styles.todoItem}>
                   <Text style={styles.todoText}>
-                    {data.item}
+                    {data.item.task}
                   </Text>
-
-                  <Icon 
-                    name="check"
-                    size={25}
-                    color={'green'}
-                    style={{margin: 5}}
-                    onPress={()=>{}}
-                  />
 
                   <Icon 
                     name="remove"
                     size={25}
                     color={'red'}
-                    style={{margin: 5}}
-
+                    style={{padding: 5, position: "absolute", right: 10}}
+                    onPress={()=>{remove(data.index)}}
                   />
                   
                 </View>
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: "royalblue",
     padding: 5,
-    paddingTop: 20,
+    paddingTop: 25,
     paddingBottom: 5,
     paddingLeft: 10,
     marginBottom: 5
@@ -154,7 +154,9 @@ const styles = StyleSheet.create({
   todoText: {
     width: "80%", 
     fontSize: 20, 
-    paddingLeft: 5
+    paddingLeft: 5,
+    color: "white",
+    fontWeight: "bold"
   },
   clrBtn: {
     position: "absolute",
