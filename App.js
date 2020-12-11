@@ -1,10 +1,21 @@
 // import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { StyleSheet, Text, View, TextInput, ImageBackground, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ImageBackground, TouchableOpacity, FlatList } from 'react-native';
+
 
 export default function App() {
+  let [inpVal, setinpVal] = useState('')
+  let [todo, setTodo] = useState([]);
+
+  const addTodo = val=> {
+    
+    setTodo([...todo, val])
+    setinpVal("")
+  }
+
+
   return (
     <View style={styles.container}>
 
@@ -12,101 +23,45 @@ export default function App() {
 
         <View style={styles.TopBar}>
           <Text style={styles.Head}>TODO LIST</Text>
+          <TouchableOpacity onPress={()=>{setTodo([])}} style={styles.clrBtn}>
+            <Text style={styles.clrText}>
+              Clear All
+            </Text>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.todos}>
 
-          <View style={styles.todoItem}>
-            <Text style={styles.todoText}>
-              Conqure India
-            </Text>
+          <FlatList
+            data={todo}
+            renderItem={(data)=>{
+              return (
+                <View style={styles.todoItem}>
+                  <Text style={styles.todoText}>
+                    {data.item}
+                  </Text>
 
-            <Icon 
-              name="edit"
-              size={25}
-              color={'green'}
-              style={{margin: 5}}
-              onPress={()=>{}}
-            />
+                  <Icon 
+                    name="check"
+                    size={25}
+                    color={'green'}
+                    style={{margin: 5}}
+                    onPress={()=>{}}
+                  />
 
-            <Icon 
-              name="remove"
-              size={25}
-              color={'red'}
-              style={{margin: 5}}
+                  <Icon 
+                    name="remove"
+                    size={25}
+                    color={'red'}
+                    style={{margin: 5}}
 
-            />
-            
-          </View>
-
-          <View style={styles.todoItem}>
-            <Text style={styles.todoText}>
-              Conqure India
-            </Text>
-
-            <Icon 
-              name="edit"
-              size={25}
-              color={'green'}
-              style={{margin: 5}}
-              onPress={()=>{}}
-            />
-
-            <Icon 
-              name="remove"
-              size={25}
-              color={'red'}
-              style={{margin: 5}}
-
-            />
-            
-          </View>
-
-          <View style={styles.todoItem}>
-            <Text style={styles.todoText}>
-              Conqure India
-            </Text>
-
-            <Icon 
-              name="edit"
-              size={25}
-              color={'green'}
-              style={{margin: 5}}
-              onPress={()=>{}}
-            />
-
-            <Icon 
-              name="remove"
-              size={25}
-              color={'red'}
-              style={{margin: 5}}
-
-            />
-            
-          </View>
-
-          <View style={styles.todoItem}>
-            <Text style={styles.todoText}>
-              Conqure India
-            </Text>
-
-            <Icon 
-              name="edit"
-              size={25}
-              color={'green'}
-              style={{margin: 5}}
-              onPress={()=>{}}
-            />
-
-            <Icon 
-              name="remove"
-              size={25}
-              color={'red'}
-              style={{margin: 5}}
-
-            />
-            
-          </View>
+                  />
+                  
+                </View>
+              )
+            }}
+            keyExtractor={item => item.id}
+          />
 
         </View>
         
@@ -116,9 +71,11 @@ export default function App() {
             autoCorrect={false}
             placeholder="Enter todo"
             style={styles.inp}
+            value={inpVal}
+            onChangeText={(text)=> {setinpVal(text)}}
           />
 
-          <TouchableOpacity activeOpacity={0.8} style={styles.addBtn}>
+          <TouchableOpacity onPress={()=> {addTodo(inpVal)}} activeOpacity={0.8} style={styles.addBtn}>
             <Text style={styles.btnText}>+</Text>
           </TouchableOpacity>
 
@@ -135,13 +92,9 @@ const styles = StyleSheet.create({
     flex: 1
   },
   Head: {
-    textAlign: "center",
     fontSize: 35,
     fontWeight: "bold",
-    backgroundColor: "royalblue",
     color: "white",
-    padding: 5,
-    paddingTop: 30,
   },
   inputTodo: {
     flex: 1.5,
@@ -161,7 +114,14 @@ const styles = StyleSheet.create({
     flex: 10,
   },
   TopBar: {
-    flex: 2,
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: "royalblue",
+    padding: 5,
+    paddingTop: 20,
+    paddingBottom: 5,
+    paddingLeft: 10,
+    marginBottom: 5
   },
   addBtn: {
     backgroundColor: "royalblue",
@@ -196,6 +156,13 @@ const styles = StyleSheet.create({
     fontSize: 20, 
     paddingLeft: 5
   },
-  
+  clrBtn: {
+    position: "absolute",
+    right: 10,
+    bottom: 15
+  },
+  clrText: {
+    color: "white",
+  }
 
 });
